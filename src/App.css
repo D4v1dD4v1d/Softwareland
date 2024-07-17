@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-  background-color: rgb(24, 124, 31);;
   min-height: 100vh;
 }
-.html,body{
+body{
   background-color: rgb(24, 124, 31);
 }
 .App-logo {
