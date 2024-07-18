@@ -1,3 +1,13 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: green;
+}
+
+.carousel-caption {
+  color: green;
+}
+
+
 .App {
   text-align: center;
   min-height: 100vh;
