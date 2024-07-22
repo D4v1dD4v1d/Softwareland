@@ -9,12 +9,12 @@ import {
 // items es un arreglo de objetos que es lo que va a llevar el carousel
 const items = [
   {
-    src: 'https://via.placeholder.com/800x400?text=First+Slide',
+    src: '/imagen1.jpg',
     altText: 'Slide 1',
     caption: 'Slide 1'
   },
   {
-    src: 'https://via.placeholder.com/800x400?text=Second+Slide',
+    src: 'https://www.hibridosyelectricos.com/uploads/s1/48/63/72/seres-nueva-marca-coches-electricos-seres-3-portada2.jpeg',
     altText: 'Slide 2',
     caption: 'Slide 2'
   },
@@ -32,11 +32,16 @@ const items = [
 
 const CustomCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  //active index, es el index de la imagen que se va a mostrar en el carousel
   const [animating, setAnimating] = useState(false);
 
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    //=== es para comparar estrictamente valor y tipo de dato
+    /*si el indice actual es igual a la longitud -1 es decir al la ultima imagen
+     este se reinicia, si no, solo aumenta en 1 el indice
+    */
     setActiveIndex(nextIndex);
   };
 
@@ -44,6 +49,7 @@ const CustomCarousel = () => {
     if (animating) return;
     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
+    //esta funcion es lo mismo que next pero invertida para regresar en lugar de avanzar
   };
 
   const goToIndex = (newIndex) => {

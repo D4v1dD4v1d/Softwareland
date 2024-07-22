@@ -7,6 +7,8 @@ import Color from './components/colorSitio';
 import ModalButton from './components/ModalButton';
 import ToastButton from './components/Toast';
 import CustomCarousel from './components/CustomCarousel';
+import CustomTable from './components/CustomTable';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,6 +19,7 @@ function App() {
         <ToastButton/>
         <ModalButton/>
         <CustomCarousel/>
+        <CustomTable />
     </div>
   );
 }
