@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import React, { useState,useEffect } from 'react';
+import { Form, FormGroup, Label, Input, Button,FormFeedback } from 'reactstrap';
 import ModalButton from './ModalButton';
 
 function FormularioRegistro() {
@@ -17,8 +17,31 @@ function FormularioRegistro() {
   });
 
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [validName, setValidName]= useState(false);
+  const [validEmail, setValidEmail]= useState(false);
+  const [validAge, setValidAge]= useState(false);
+  const [validDate, setValidDate]= useState(false);
+  const nameExpression = /^[a-zA-Z]+$/;
+  const emailExpression = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const ageExpression = /^(100|[1-9]?[0-9])$/;
+
+  useEffect(() => {
+    setValidName(nameExpression.test(formData.nombre));
+    setValidName(nameExpression.test(formData.apellido));
+    setValidEmail(emailExpression.test(formData.email));
+    setValidAge(ageExpression.test(formData.edad));
+
+    const fechaActual = new Date();
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+    const dia = String(fechaActual.getDate()).padStart(2, '0');
+    const año = fechaActual.getFullYear();
+    const fechaActualFormateada = `${año}-${mes}-${dia}`;
+
+    setValidDate(formData.fechaRegistro >= fechaActualFormateada);
+  }, [formData]);
 
   const handleChange = (e) => {
+    
     /*esta funcion se llamada cada que un input tiene algun cambio en la interfaz
     lanza la excepcion y el target es el input que fue cambiado*/
     const { name, value, type, checked } = e.target;
@@ -41,6 +64,21 @@ function FormularioRegistro() {
        * si lo es lo checkea o no segun venga en la constante
        */
     });
+    /*toma los valores viejos
+    setValidName(nameExpression.test(formData.nombre));
+    setValidEmail(emailExpression.test(formData.email));
+    setValidAge(ageExpression.test(formData.edad));
+
+    const fechaActual = new Date();
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+    const dia = String(fechaActual.getDate()).padStart(2, '0');
+    const año = fechaActual.getFullYear();
+
+    const fechaActualFormateada = `${año}-${mes}-${dia}`;
+    setValidDate(formData.fechaRegistro<fechaActualFormateada?false:true);
+    console.log("seleccionada ",formData.fechaRegistro,"  actual",fechaActualFormateada,"
+         ",validDate);
+         */
   };
   const handleReset = () => {
     setFormData({
@@ -59,23 +97,29 @@ function FormularioRegistro() {
 
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();//evita que se recargue la pagina
   };
 
   const toggleModal = () => setShowModal(!showModal); // Función para alternar la visibilidad del modal
+  
+
 
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Label for="nombre">Nombre</Label>
         <Input
+          required
           type="text"
           name="nombre"
           id="nombre"
           placeholder="Introduce tu nombre"
           value={formData.nombre}
           onChange={handleChange}
+          invalid={!validName}
+          valid={validName}
         />
+        {!validName && <FormFeedback>El nombre solo puede contener letras</FormFeedback>}
       </FormGroup>
       <FormGroup>
         <Label for="apellido">Apellido</Label>
@@ -86,7 +130,10 @@ function FormularioRegistro() {
           placeholder="Introduce tu apellido"
           value={formData.apellido}
           onChange={handleChange}
+          valid={validName}
+          invalid={!validName}
         />
+        {!validName && <FormFeedback>El apellido solo puede contener letras</FormFeedback>}
       </FormGroup>
       <FormGroup>
         <Label for="email">Email</Label>
@@ -97,7 +144,10 @@ function FormularioRegistro() {
           placeholder="Introduce tu email"
           value={formData.email}
           onChange={handleChange}
+          invalid={!validEmail}
+          valid={validEmail}
         />
+        {!validEmail && <FormFeedback>El email debe tener el formato 'nombredeusuario@dominio.ext'</FormFeedback>}
       </FormGroup>
       <FormGroup>
         <Label for="password">Contraseña</Label>
@@ -108,6 +158,7 @@ function FormularioRegistro() {
           placeholder="Introduce tu contraseña"
           value={formData.password}
           onChange={handleChange}
+
         />
       </FormGroup>
       <FormGroup>
@@ -119,7 +170,10 @@ function FormularioRegistro() {
           placeholder="Introduce tu edad"
           value={formData.edad}
           onChange={handleChange}
+          valid={validAge}
+          invalid={!validAge}
         />
+        {!validAge && <FormFeedback>La edad debe ser un número entre 1 y 100</FormFeedback>}
       </FormGroup>
       <FormGroup tag="fieldset">
         <legend>Género</legend>
@@ -191,10 +245,13 @@ function FormularioRegistro() {
           id="fechaRegistro"
           value={formData.fechaRegistro}
           onChange={handleChange}
+          valid={validDate}
+          invalid={!validDate}
         />
+        {!validDate && <FormFeedback>La fecha debe ser de hoy en adelante</FormFeedback>}
       </FormGroup>
       <Button onClick={toggleModal} color='primary' type="button">Mostrar</Button>
-      <Button onClick={handleReset} color='secondary' type="button">Reiniciar</Button>
+      <Button onClick={handleReset} color='secondary' type="submit">Reiniciar</Button>
 
       {showModal && <ModalButton data={formData} toggle={toggleModal} />}
     </Form>
