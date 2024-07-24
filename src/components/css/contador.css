@@ -1,0 +1,22 @@
+.contador{
+    text-align: center;
+
+}
+.contador h1{
+    font-size: 2.5rem;
+    color: rgb(4, 45, 10);
+}
+.contador button{
+    border-radius: 5%;
+    width: 6rem;
+    height: 3rem;
+    color: blanchedalmond;
+    background-color: black;
+}
+.contador button:hover{
+    border-radius: 5%;
+    width: 7rem;
+    height: 3.5rem;
+    color: black;
+    background-color: blanchedalmond;
+}

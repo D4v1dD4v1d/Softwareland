@@ -1,0 +1,14 @@
+.color button{
+    border-radius: 5%;
+    width: 6rem;
+    height: 3rem;
+    color: blanchedalmond;
+    background-color: black;
+}
+.color button:hover{
+    border-radius: 5%;
+    width: 7rem;
+    height: 3.5rem;
+    color: black;
+    background-color: blanchedalmond;
+}
