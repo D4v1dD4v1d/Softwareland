@@ -1,22 +1,3 @@
 [
-  { "id": 1, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdwLyff91d7ySE70MMqJJYkBvaXPsT7TA76w&s" },
-  { "id": 2, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ksA6c--vY5FZjJurI-ofr1B45wc-q7GWgA&s" },
-  { "id": 3, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd5OaTP17Xb5k2n1-UpJrwkYJR8_gvFlACSA&s" },
-  { "id": 4, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd5OaTP17Xb5k2n1-UpJrwkYJR8_gvFlACSA&s" },
-  { "id": 5, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd5OaTP17Xb5k2n1-UpJrwkYJR8_gvFlACSA&s" },
-  { "id": 6, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkRAejTqXlKRA6FoOnDGBkOIn5sAAChV7MRQ&s" },
-  { "id": 7, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDesmd-KkX-ubBUp70BdPUokS-mGMlOVlwvg&s" },
-  { "id": 8, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDesmd-KkX-ubBUp70BdPUokS-mGMlOVlwvg&s" },
-  { "id": 9, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDesmd-KkX-ubBUp70BdPUokS-mGMlOVlwvg&s" },
-  { "id": 10, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDesmd-KkX-ubBUp70BdPUokS-mGMlOVlwvg&s" },
-  { "id": 11, "text1": "David", "text2": "Pérez Zavala", "icon": "faAnchorCircleExclamation", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlXwwqQ4d2qU0UM4h9sexPySkvsVOMXNTRxw&s" },
-  { "id": 12, "text1": "David", "text2": "Pérez Zavala", "icon": "faBalanceScale", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlXwwqQ4d2qU0UM4h9sexPySkvsVOMXNTRxw&s" },
-  { "id": 13, "text1": "David", "text2": "Pérez Zavala", "icon": "faBalanceScale", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3-pTgHBWHIT0a8Pt9_yw-iWn5b4Xz2ETg1Q&s" },
-  { "id": 14, "text1": "David", "text2": "Pérez Zavala", "icon": "faBalanceScale", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3-pTgHBWHIT0a8Pt9_yw-iWn5b4Xz2ETg1Q&s" },
-  { "id": 15, "text1": "David", "text2": "Pérez Zavala", "icon": "faBalanceScale", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgmm5fxawzxrvBGmXXlaHYXwpkxlfE3Gd_MA&s" },
-  { "id": 16, "text1": "David", "text2": "Pérez Zavala", "icon": "faArrows", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgmm5fxawzxrvBGmXXlaHYXwpkxlfE3Gd_MA&s" },
-  { "id": 17, "text1": "David", "text2": "Pérez Zavala", "icon": "faArrows", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgmm5fxawzxrvBGmXXlaHYXwpkxlfE3Gd_MA&s" },
-  { "id": 18, "text1": "David", "text2": "Pérez Zavala", "icon": "faArrows", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-bt6N0sHMU4pVRJWK7FCXsSnYf0qHTXEow&s" },
-  { "id": 19, "text1": "David", "text2": "Pérez Zavala", "icon": "faArrows", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-bt6N0sHMU4pVRJWK7FCXsSnYf0qHTXEow&s" },
-  { "id": 20, "text1": "David", "text2": "Pérez Zavala", "icon": "faArrows", "button": "Button", "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-bt6N0sHMU4pVRJWK7FCXsSnYf0qHTXEow&s" }
-]
+  { "nombre": "David", "apellidos": "Pérez", "email": "david.pz.zv@gmail.com", "contraseña": "1234567890", "edad": "22", "genero": "Masculino", "rol": "administrador", "opciones": "true", "notas": "no hay nada que decir de este galan", "registro": "25-07-2024" }
+  ]

@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from 'react';
-import { Form, FormGroup, Label, Input, Button,FormFeedback } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
 import ModalButton from './ModalButton';
-
+import CustomTable from './CustomTable';
 function FormularioRegistro() {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -16,70 +16,59 @@ function FormularioRegistro() {
     fechaRegistro: ''
   });
 
-  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
-  const [validName, setValidName]= useState(false);
-  const [validEmail, setValidEmail]= useState(false);
-  const [validAge, setValidAge]= useState(false);
-  const [validDate, setValidDate]= useState(false);
-  const nameExpression = /^[a-zA-Z]+$/;
+  const [dataList, setDataList] = useState([]); 
+  //const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [validName, setValidName] = useState(false);
+  const [validLastname, setValidLastname] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [validAge, setValidAge] = useState(false);
+  const [validDate, setValidDate] = useState(false);
+  const [validRole, setValidRole] = useState(false);
+  const nameExpression = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
+  const lastnameExpression = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
   const emailExpression = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const ageExpression = /^(100|[1-9]?[0-9])$/;
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Evita que se recargue la página
+    if (validName && validEmail && validAge && validDate && validRole) {
+      setDataList([...dataList, formData]); // Agrega el nuevo objeto al array
+      console.log(dataList);
+      handleReset();
+    }
+  };
+
+  const handleDelete = (email) => {
+    setDataList(dataList.filter(item => item.email !== email));
+  };
+  
   useEffect(() => {
     setValidName(nameExpression.test(formData.nombre));
-    setValidName(nameExpression.test(formData.apellido));
+    console.log(formData);
+    console.log("este es el arreglo; ",{dataList});
+    setValidLastname(lastnameExpression.test(formData.apellido));
     setValidEmail(emailExpression.test(formData.email));
     setValidAge(ageExpression.test(formData.edad));
+    formData.rol!==''?setValidRole(true):setValidRole(false);
+    
 
     const fechaActual = new Date();
     const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
     const dia = String(fechaActual.getDate()).padStart(2, '0');
     const año = fechaActual.getFullYear();
     const fechaActualFormateada = `${año}-${mes}-${dia}`;
-
     setValidDate(formData.fechaRegistro >= fechaActualFormateada);
   }, [formData]);
 
   const handleChange = (e) => {
-    
-    /*esta funcion se llamada cada que un input tiene algun cambio en la interfaz
-    lanza la excepcion y el target es el input que fue cambiado*/
     const { name, value, type, checked } = e.target;
-    /*las constantes toman el valor del elemento que se cambio
-    por ejemplo si se toma el campo de email las constantes tomarian
-    name=email
-    value=el valor que tiene el objeto
-    type=email
-    checked=undefined
-    */
+    console.log("target: ",name,"  value:",value);
     setFormData({
-      /**
-       * se utiliza el operador de propagacion que lo que hace es expandir el objeto
-       */
       ...formData,
       [name]: type === 'checkbox' ? checked : value
-      /**
-       * se utiliza el operador ternario
-       * si el tipo de campo no es estrictamente checkbox le asigna el valor,
-       * si lo es lo checkea o no segun venga en la constante
-       */
     });
-    /*toma los valores viejos
-    setValidName(nameExpression.test(formData.nombre));
-    setValidEmail(emailExpression.test(formData.email));
-    setValidAge(ageExpression.test(formData.edad));
-
-    const fechaActual = new Date();
-    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
-    const dia = String(fechaActual.getDate()).padStart(2, '0');
-    const año = fechaActual.getFullYear();
-
-    const fechaActualFormateada = `${año}-${mes}-${dia}`;
-    setValidDate(formData.fechaRegistro<fechaActualFormateada?false:true);
-    console.log("seleccionada ",formData.fechaRegistro,"  actual",fechaActualFormateada,"
-         ",validDate);
-         */
   };
+
   const handleReset = () => {
     setFormData({
       nombre: '',
@@ -94,15 +83,6 @@ function FormularioRegistro() {
       fechaRegistro: ''
     });
   };
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();//evita que se recargue la pagina
-  };
-
-  const toggleModal = () => setShowModal(!showModal); // Función para alternar la visibilidad del modal
-  
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -130,8 +110,8 @@ function FormularioRegistro() {
           placeholder="Introduce tu apellido"
           value={formData.apellido}
           onChange={handleChange}
-          valid={validName}
-          invalid={!validName}
+          valid={validLastname}
+          invalid={!validLastname}
         />
         {!validName && <FormFeedback>El apellido solo puede contener letras</FormFeedback>}
       </FormGroup>
@@ -158,7 +138,6 @@ function FormularioRegistro() {
           placeholder="Introduce tu contraseña"
           value={formData.password}
           onChange={handleChange}
-
         />
       </FormGroup>
       <FormGroup>
@@ -210,7 +189,10 @@ function FormularioRegistro() {
           id="rol"
           value={formData.rol}
           onChange={handleChange}
+          valid={validRole}
+          invalid={!validRole}
         >
+          {!validRole && <FormFeedback>Debe seleccionar un rol</FormFeedback>}
           <option value="">Selecciona un rol</option>
           <option value="administrador">Administrador</option>
           <option value="usuario">Usuario</option>
@@ -250,12 +232,12 @@ function FormularioRegistro() {
         />
         {!validDate && <FormFeedback>La fecha debe ser de hoy en adelante</FormFeedback>}
       </FormGroup>
-      <Button onClick={toggleModal} color='primary' type="button">Mostrar</Button>
-      <Button onClick={handleReset} color='secondary' type="submit">Reiniciar</Button>
-
-      {showModal && <ModalButton data={formData} toggle={toggleModal} />}
+      <Button color='primary' type="submit">Guardar</Button>
+      <Button onClick={handleReset} color='secondary' type="button">Reiniciar</Button>
+      <CustomTable data={dataList} onDelete={handleDelete} />
     </Form>
   );
 }
+//      {showModal && <ModalButton data={dataList} toggle={toggleModal} />} {/* Pasar dataList al ModalButton */}
 
 export default FormularioRegistro;

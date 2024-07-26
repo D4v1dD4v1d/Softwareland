@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
-import data from './data.json';
 
-const CustomTable = () => {
+const CustomTable = ({data, onDelete}) => {
   const [modal, setModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -17,6 +16,9 @@ const CustomTable = () => {
     setModal(!modal);
   };
 
+  if (!Array.isArray(data)) {
+    return <p>No data available.</p>;
+  }
   return (
     <div>
       <Modal isOpen={modal} toggle={closeToggle}>
@@ -38,25 +40,39 @@ const CustomTable = () => {
       <Table striped>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Text Column 1</th>
-            <th>Text Column 2</th>
-            <th>Icon</th>
-            <th>Button</th>
+            <th><b>NOMBRE</b></th>
+            <th><b>APELLIDOS</b></th>
+            <th><b>EMAIL</b></th>
+            <th><b>EDAD</b></th>
+            <th><b>GENERO</b></th>
+            <th><b>ROL</b></th>
+            <th><b>OPCIONES</b></th>
+            <th><b>NOTAS</b></th>
+            <th><b>FECHA DE REGISTRO</b></th>
+            <th><b>ACCIONES</b></th>
           </tr>
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.text1}</td>
-              <td>{row.text2}</td>
+            <tr key={row.email}>
+              <td>{row.nombre}</td>
+              <td>{row.apellidos}</td>
+              <td>{row.email}</td>
+              <td>{row.edad}</td>
+              <td>{row.genero}</td>
+              <td>{row.rol}</td>
+              <td>{row.opciones?"Opciones aceptadas":"Opciones no aceptadas"}</td>
+              <td>{row.notas}</td>
+              <td>{row.fechaRegistro.split("-").reverse().join("-")}</td>
               <td>
-                <FontAwesomeIcon icon={Icons[row.icon]} />
+                <Button onClick={() => onDelete(row.email)} color="danger">
+                  Eliminar
+                </Button>
+                <Button onClick={() => toggle(row.id)} color="warning">
+                  Editar
+                </Button>
               </td>
-              <td>
-                <Button onClick={() => toggle(row.id)} color="secondary">Button</Button>
-              </td>
+              
             </tr>
           ))}
         </tbody>
