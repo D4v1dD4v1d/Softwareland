@@ -51,10 +51,10 @@ const CustomTable = ({data, onDelete}) => {
               <td>{row.fechaRegistro.split("-").reverse().join("-")}</td>
               <td>
                 <Button onClick={() => onDelete(row.email)} color="danger">
-                  <FontAwesomeIcon icon={Icons.fa5} />
+                  <FontAwesomeIcon icon={Icons.faTrash} />
                 </Button>
                 <Button onClick={() => toggle(row.id)} color="warning">
-                  Editar
+                  <FontAwesomeIcon icon={Icons.faPencil} />
                 </Button>
               </td>
               
