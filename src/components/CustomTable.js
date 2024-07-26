@@ -6,7 +6,7 @@ import * as Icons from '@fortawesome/free-solid-svg-icons';
 const CustomTable = ({data, onDelete}) => {
   const [modal, setModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-
+  console.log("Icons: ",Icons);
   const toggle = (id) => {
     setSelectedId(id);
     setModal(!modal);
@@ -21,22 +21,7 @@ const CustomTable = ({data, onDelete}) => {
   }
   return (
     <div>
-      <Modal isOpen={modal} toggle={closeToggle}>
-        <ModalHeader toggle={closeToggle}>Titulo del Modal</ModalHeader>
-        <ModalBody>
-          {selectedId !== null && (
-            <img src={data.find(row => row.id === selectedId).imgSrc} alt="carro" className="img-fluid" />
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={closeToggle}>
-            Aceptar
-          </Button>{' '}
-          <Button color="secondary" onClick={closeToggle}>
-            Cancelar
-          </Button>
-        </ModalFooter>
-      </Modal>
+      
       <Table striped>
         <thead>
           <tr>
@@ -66,12 +51,13 @@ const CustomTable = ({data, onDelete}) => {
               <td>{row.fechaRegistro.split("-").reverse().join("-")}</td>
               <td>
                 <Button onClick={() => onDelete(row.email)} color="danger">
-                  Eliminar
+                  <FontAwesomeIcon icon={Icons.fa5} />
                 </Button>
                 <Button onClick={() => toggle(row.id)} color="warning">
                   Editar
                 </Button>
               </td>
+              
               
             </tr>
           ))}

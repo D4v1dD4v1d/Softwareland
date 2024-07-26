@@ -17,7 +17,7 @@ function FormularioRegistro() {
   });
 
   const [dataList, setDataList] = useState([]); 
-  //const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
   const [validName, setValidName] = useState(false);
   const [validLastname, setValidLastname] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -32,6 +32,7 @@ function FormularioRegistro() {
   const handleSubmit = (e) => {
     e.preventDefault(); // Evita que se recargue la página
     if (validName && validEmail && validAge && validDate && validRole) {
+      //toogle del modal
       setDataList([...dataList, formData]); // Agrega el nuevo objeto al array
       console.log(dataList);
       handleReset();
@@ -83,7 +84,10 @@ function FormularioRegistro() {
       fechaRegistro: ''
     });
   };
-
+  const toggleModal = () => {
+    console.log(showModal);
+    setShowModal(!showModal);
+  };
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
@@ -138,6 +142,7 @@ function FormularioRegistro() {
           placeholder="Introduce tu contraseña"
           value={formData.password}
           onChange={handleChange}
+          minLength={6}
         />
       </FormGroup>
       <FormGroup>
@@ -235,9 +240,10 @@ function FormularioRegistro() {
       <Button color='primary' type="submit">Guardar</Button>
       <Button onClick={handleReset} color='secondary' type="button">Reiniciar</Button>
       <CustomTable data={dataList} onDelete={handleDelete} />
+       
     </Form>
   );
 }
-//      {showModal && <ModalButton data={dataList} toggle={toggleModal} />} {/* Pasar dataList al ModalButton */}
+//{showModal && <ModalButton data={formData} toggle={toggleModal} />}
 
 export default FormularioRegistro;
