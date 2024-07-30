@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
 import ModalButton from './ModalButton';
 import CustomTable from './CustomTable';
+
 function FormularioRegistro() {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -17,24 +18,33 @@ function FormularioRegistro() {
   });
 
   const [dataList, setDataList] = useState([]); 
-  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [showModal, setShowModal] = useState(false);
   const [validName, setValidName] = useState(false);
   const [validLastname, setValidLastname] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [validAge, setValidAge] = useState(false);
   const [validDate, setValidDate] = useState(false);
   const [validRole, setValidRole] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+
   const nameExpression = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
   const lastnameExpression = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
   const emailExpression = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const ageExpression = /^(100|[1-9]?[0-9])$/;
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que se recargue la página
-    if (validName && validEmail && validAge && validDate && validRole) {
-      //toogle del modal
-      setDataList([...dataList, formData]); // Agrega el nuevo objeto al array
-      console.log(dataList);
+    e.preventDefault();
+    if (validName && validLastname && validEmail && validAge && validDate && validRole) {
+      if (editIndex !== null) {
+        // Editando un registro existente
+        const updatedDataList = [...dataList];
+        updatedDataList[editIndex] = formData;
+        setDataList(updatedDataList);
+        setEditIndex(null);
+      } else {
+        // Añadiendo un nuevo registro
+        setDataList([...dataList, formData]);
+      }
       handleReset();
     }
   };
@@ -42,19 +52,21 @@ function FormularioRegistro() {
   const handleDelete = (email) => {
     setDataList(dataList.filter(item => item.email !== email));
   };
-  
+
+  const handleEdit = (index) => {
+    setFormData(dataList[index]);
+    setEditIndex(index);
+  };
+
   useEffect(() => {
     setValidName(nameExpression.test(formData.nombre));
-    console.log(formData);
-    console.log("este es el arreglo; ",{dataList});
     setValidLastname(lastnameExpression.test(formData.apellido));
     setValidEmail(emailExpression.test(formData.email));
     setValidAge(ageExpression.test(formData.edad));
-    formData.rol!==''?setValidRole(true):setValidRole(false);
-    
+    setValidRole(formData.rol !== '');
 
     const fechaActual = new Date();
-    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
     const dia = String(fechaActual.getDate()).padStart(2, '0');
     const año = fechaActual.getFullYear();
     const fechaActualFormateada = `${año}-${mes}-${dia}`;
@@ -63,7 +75,6 @@ function FormularioRegistro() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log("target: ",name,"  value:",value);
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value
@@ -83,11 +94,13 @@ function FormularioRegistro() {
       notas: '',
       fechaRegistro: ''
     });
+    setEditIndex(null);
   };
+
   const toggleModal = () => {
-    console.log(showModal);
     setShowModal(!showModal);
   };
+
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
@@ -117,7 +130,7 @@ function FormularioRegistro() {
           valid={validLastname}
           invalid={!validLastname}
         />
-        {!validName && <FormFeedback>El apellido solo puede contener letras</FormFeedback>}
+        {!validLastname && <FormFeedback>El apellido solo puede contener letras</FormFeedback>}
       </FormGroup>
       <FormGroup>
         <Label for="email">Email</Label>
@@ -197,11 +210,11 @@ function FormularioRegistro() {
           valid={validRole}
           invalid={!validRole}
         >
-          {!validRole && <FormFeedback>Debe seleccionar un rol</FormFeedback>}
           <option value="">Selecciona un rol</option>
           <option value="administrador">Administrador</option>
           <option value="usuario">Usuario</option>
         </Input>
+        {!validRole && <FormFeedback>Debe seleccionar un rol</FormFeedback>}
       </FormGroup>
       <FormGroup check>
         <Label check>
@@ -239,11 +252,9 @@ function FormularioRegistro() {
       </FormGroup>
       <Button color='primary' type="submit">Guardar</Button>
       <Button onClick={handleReset} color='secondary' type="button">Reiniciar</Button>
-      <CustomTable data={dataList} onDelete={handleDelete} />
-       
+      <CustomTable data={dataList} onDelete={handleDelete} onEdit={handleEdit} />
     </Form>
   );
 }
-//{showModal && <ModalButton data={formData} toggle={toggleModal} />}
 
 export default FormularioRegistro;
