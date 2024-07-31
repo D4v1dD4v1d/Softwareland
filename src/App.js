@@ -9,12 +9,14 @@ import ToastButton from './components/Toast';
 import CustomCarousel from './components/CustomCarousel';
 import CustomTable from './components/CustomTable';
 import FormularioRegistro from './components/FormularioRegistro';
+import RandomUser from './components/ConsultaAPI';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <FormularioRegistro/>
+      <RandomUser/>
     </div>
   );
 }
