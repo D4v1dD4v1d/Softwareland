@@ -10,13 +10,14 @@ import CustomCarousel from './components/CustomCarousel';
 import CustomTable from './components/CustomTable';
 import FormularioRegistro from './components/FormularioRegistro';
 import RandomUser from './components/ConsultaAPI';
+import BeerList from './components/Cervezas';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <RandomUser/>
+      <BeerList/>
     </div>
   );
 }
